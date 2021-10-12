@@ -26,7 +26,7 @@ namespace DempApp.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var rng = new Random();
+            Random rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
@@ -42,7 +42,7 @@ namespace DempApp.Controllers
             string myName = "Vinay";
             myName.ThrowIfOutOfLength(7, 10, nameof(myName));
 
-            var input = "";
+            string input = "";
             input.ThrowIfNullOrEmpty(nameof(input));
             return Ok();
         }

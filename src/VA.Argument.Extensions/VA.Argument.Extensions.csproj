@@ -1,7 +1,45 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>VA.Argument.Extensions</PackageId>
+    <Title>VA.Argument.Extensions</Title>
+    <Company>Vinay Arora</Company>
+    <Authors>Vinay Arora</Authors>
+    <Description>This package can be used to check method parameters' values and throw appropriate exceptions to avoid confusing NullReferenceException in any C#, .NET application.</Description>
+    <Summary>This package can be used to check method parameters' values and throw appropriate exceptions to avoid confusing NullReferenceException in any C#, .NET application.</Summary>
+    <Copyright>©2021 VA. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/vinaykarora/VA.Argument.Extensions</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/vinaykarora/VA.Argument.Extensions</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageReleaseNotes>1. ThrowIfOutOfLength method issue has been fixed.</PackageReleaseNotes>
+    <PackageTags>C#, .NET, ArgumentGuard, ParamterGuard, ThrowIfNull, ParameterChecker</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Version>1.0.0</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="System.Memory" Version="4.5.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
