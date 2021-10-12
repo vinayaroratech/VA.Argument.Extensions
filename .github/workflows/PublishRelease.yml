@@ -28,4 +28,4 @@ jobs:
       - name: Package
         run: dotnet pack --configuration Release --no-build --force
       - name: Publish
-        run: dotnet nuget push -k $NUGET_AUTH_TOKEN -s https://nuget.pkg.github.com/vinaykarora/index.json bin/Release/*.nupkg
+        run: dotnet nuget push -k $NUGET_AUTH_TOKEN -s https://nuget.pkg.github.com/vinaykarora/index.json ./src/VA.Argument.Extensions/bin/Release/*.nupkg
