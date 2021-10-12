@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>VA.Argument.Extensions</PackageId>
     <Title>VA.Argument.Extensions</Title>
     <Company>Vinay Arora</Company>
