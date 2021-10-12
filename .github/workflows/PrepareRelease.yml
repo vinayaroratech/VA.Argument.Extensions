@@ -15,7 +15,7 @@ jobs:
         with:
           ref: release/${{ env.version }}
       - run: sed -i "s/.*<Version>\(.*\)<\/Version>/    <Version>$version<\/Version>/" ./src/VA.Argument.Extensions/*.csproj
-      - run: cat *.csproj
+      - run: cat ./src/VA.Argument.Extensions/*.csproj
       - run: git status
       - run: git config user.email "action@github.com"
       - run: git config user.name "Github Action"
