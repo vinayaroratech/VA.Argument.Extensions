@@ -6,7 +6,7 @@
     <Title>VA.Argument.Extensions</Title>
     <Company>Vinay Arora</Company>
     <Authors>Vinay Arora</Authors>
-    <Version>0.1.0$(VersionSuffix)</Version>
+    <Version>0.1.0</Version>
     <IsPackable>true</IsPackable>
     <Description>This package can be used to check method parameters' values and throw appropriate exceptions to avoid confusing NullReferenceException in any C#, .NET application.</Description>
     <Summary>This package can be used to check method parameters' values and throw appropriate exceptions to avoid confusing NullReferenceException in any C#, .NET application.</Summary>
