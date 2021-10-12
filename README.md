@@ -10,9 +10,14 @@ This library can be used to check method parameters' values and throw appropriat
 First install the lastest version of `VA.Argument.Extensions` [nuget package](https://github.com/vinaykarora/VA.Argument.Extensions/packages/1039211) into your project as follows:
     
     Added Package Source `https://nuget.pkg.github.com/vinaykarora/index.json` in Nuget Package Manager
- 
+
+Install from the package manager console:
+    
     Install-Package VA.Argument.Extensions
     
+Install from the command line:
+    
+    dotnet add <path-to-csproj-file> package VA.Argument.Extensions
  ## 🛠️ Usage:
 
 ```C#
