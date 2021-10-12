@@ -1,0 +1,37 @@
+name: Publish Build
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      [ opened, synchronize, reopened]
+  
+jobs:
+  publishbuild:
+    if: ${{ contains(github.event.pull_request.head.ref, 'feature/') || contains(github.event.pull_request.head.ref, 'bugfix/')}}
+    runs-on: ubuntu-latest
+    env:
+      NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - id: versionstep
+      name: Extract version
+      run: echo "version=$(grep '<Version>' < *.csproj | sed 's/.*<Version>\(.*\)<\/Version>/\1/' | cut -d '$' -f 1)" >> $GITHUB_ENV
+    - run: echo "build=$(date +%s%N)" >> $GITHUB_ENV
+    - name: Verify csproj
+      run: cat *.csproj
+    - name: Package
+      run: dotnet pack --force --version-suffix -build${{ env.build }} -c Release
+    - name: Publish
+      run: dotnet nuget push -k $NUGET_AUTH_TOKEN -s https://nuget.pkg.github.com/vinaykarora/index.json ./bin/Release/*.nupkg
+    - name: Tag with build version
+      run: git tag ${{ env.version }}-build${{ env.build }}
+    - run: git push origin --tags
+    

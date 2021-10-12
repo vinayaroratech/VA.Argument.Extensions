@@ -1,0 +1,25 @@
+name: Prepare Release
+
+on: create
+
+jobs: 
+  preparerelease:
+    if: ${{ contains(github.ref, 'refs/heads/release/') }}
+    runs-on: ubuntu-latest
+    env:
+      NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Parse version
+        run: echo "version=$(echo ${{ github.ref }} | rev | cut -d '/' -f 1 | rev)" >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+        with:
+          ref: release/${{ env.version }}
+      - run: sed -i "s/.*<Version>\(.*\)<\/Version>/    <Version>$version<\/Version>/" *.csproj
+      - run: cat *.csproj
+      - run: git status
+      - run: git config user.email "action@github.com"
+      - run: git config user.name "Github Action"
+      - run: git diff --quiet HEAD || (git commit -a -m "Version set" && git tag ${{ env.version }})
+      - if: ${{ !contains(env.version, '-') }}
+        run: sed -i "s/.*<Version>[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([0-9A-Za-z-]*\)<\/Version>/    <Version>\1.$(($(echo $version | cut -d '.' -f 2) + 1)).\3\$(VersionSuffix)<\/Version>/" *.csproj && git commit -a -m "Next version set"
+      - run: git push && git push --tags

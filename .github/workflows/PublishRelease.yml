@@ -1,0 +1,31 @@
+name: Publish Release
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [ ready_for_review, opened ]
+
+jobs:
+  publishrelease:
+    if: ${{ contains(github.event.pull_request.head.ref, 'release/') }}
+    runs-on: ubuntu-latest
+    env:
+      NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - run: echo "version=$(echo ${{ github.event.pull_request.head.ref }} | rev | cut -d '/' -f 1 | rev)" >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ env.version }}
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      - name: Package
+        run: dotnet pack --configuration Release --no-build --force
+      - name: Publish
+        run: dotnet nuget push -k $NUGET_AUTH_TOKEN -s https://nuget.pkg.github.com/vinaykarora/index.json bin/Release/*.nupkg
