@@ -30,7 +30,7 @@ jobs:
     - name: Package
       run: dotnet pack --force --version-suffix -build${{ env.build }} -c Release
     - name: Publish
-      run: dotnet nuget push -k $NUGET_AUTH_TOKEN -s https://nuget.pkg.github.com/vinaykarora/index.json ./bin/Release/*.nupkg
+      run: dotnet nuget push -k $NUGET_AUTH_TOKEN -s https://nuget.pkg.github.com/vinaykarora/index.json ./src/VA.Argument.Extensions/bin/Release/*.nupkg
     - name: Tag with build version
       run: git tag ${{ env.version }}-build${{ env.build }}
     - run: git push origin --tags
