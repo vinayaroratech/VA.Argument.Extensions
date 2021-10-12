@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using VA.Argument.Extensions;
 
 namespace DempApp.Controllers
 {
@@ -34,6 +34,26 @@ namespace DempApp.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpGet("ThrowIfOutOfLength")]
+        public IActionResult ThrowIfOutOfLength()
+        {
+            string myName = "Vinay";
+            myName.ThrowIfOutOfLength(7, 10, nameof(myName));
+
+            var input = "";
+            input.ThrowIfNullOrEmpty(nameof(input));
+            return Ok();
+        }
+
+        [HttpGet("ThrowIfNull")]
+        public IActionResult ThrowIfNull()
+        {
+            string value = null;
+            value.ThrowIfNull(nameof(value));
+
+            return Ok(value.ToArray());
         }
     }
 }
