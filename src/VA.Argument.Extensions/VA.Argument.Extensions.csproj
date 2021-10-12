@@ -8,6 +8,7 @@
     <Title>VA.Argument.Extensions</Title>
     <Company>Vinay Arora</Company>
     <Authors>Vinay Arora</Authors>
+    <Version>0.1.0$(VersionSuffix)</Version>
     <Description>This package can be used to check method parameters' values and throw appropriate exceptions to avoid confusing NullReferenceException in any C#, .NET application.</Description>
     <Summary>This package can be used to check method parameters' values and throw appropriate exceptions to avoid confusing NullReferenceException in any C#, .NET application.</Summary>
     <Copyright>©2021 VA. All rights reserved.</Copyright>
@@ -20,7 +21,6 @@
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl />
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -23,10 +23,10 @@ jobs:
         dotnet-version: 5.0.x
     - id: versionstep
       name: Extract version
-      run: echo "version=$(grep '<Version>' < *.csproj | sed 's/.*<Version>\(.*\)<\/Version>/\1/' | cut -d '$' -f 1)" >> $GITHUB_ENV
+      run: echo "version=$(grep '<Version>' < ./src/VA.Argument.Extensions/*.csproj | sed 's/.*<Version>\(.*\)<\/Version>/\1/' | cut -d '$' -f 1)" >> $GITHUB_ENV
     - run: echo "build=$(date +%s%N)" >> $GITHUB_ENV
     - name: Verify csproj
-      run: cat *.csproj
+      run: cat ./src/VA.Argument.Extensions/*.csproj
     - name: Package
       run: dotnet pack --force --version-suffix -build${{ env.build }} -c Release
     - name: Publish

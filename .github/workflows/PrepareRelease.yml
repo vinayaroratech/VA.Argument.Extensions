@@ -21,5 +21,5 @@ jobs:
       - run: git config user.name "Github Action"
       - run: git diff --quiet HEAD || (git commit -a -m "Version set" && git tag ${{ env.version }})
       - if: ${{ !contains(env.version, '-') }}
-        run: sed -i "s/.*<Version>[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([0-9A-Za-z-]*\)<\/Version>/    <Version>\1.$(($(echo $version | cut -d '.' -f 2) + 1)).\3\$(VersionSuffix)<\/Version>/" *.csproj && git commit -a -m "Next version set"
+        run: sed -i "s/.*<Version>[^0-9]*\([0-9]*\)[.]\([0-9]*\)[.]\([0-9]*\)\([0-9A-Za-z-]*\)<\/Version>/    <Version>\1.$(($(echo $version | cut -d '.' -f 2) + 1)).\3\$(VersionSuffix)<\/Version>/" ./src/VA.Argument.Extensions/*.csproj && git commit -a -m "Next version set"
       - run: git push && git push --tags
